@@ -1,4 +1,5 @@
 import {expect} from 'chai';
+import {List} from 'immutable';
 
 describe('immutability', () => {
   describe('a number', () => {
@@ -13,6 +14,21 @@ describe('immutability', () => {
 
       expect(nextState).to.equal(4);
       expect(state).to.equal(3); // immutability
+    })
+  })
+
+  describe('a List', () => {
+    function addMovie(currentState, movie) {
+      return currentState.push(movie);
+    }
+
+    it('is immutable', () => {
+      let state = List.of('Garry', '28hrs');
+      let nextState = addMovie(state, 'Sun');
+
+      expect(nextState).to.equal(List.of('Garry', '28hrs', 'Sun'));
+
+      expect(state).to.equal(List.of('Garry', '28hrs'));
     })
   })
 })
