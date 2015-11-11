@@ -13,5 +13,14 @@ describe('application logic', () => {
         entries: List.of('Transp', '12 hours')
       }))
     })
+
+    it('converts to immutable', () => {
+      const state = Map();
+      const entries = ['Barcelona', 'Vacations'];
+      const nextState = setEntries(state, entries);
+      expect(nextState).to.equal(Map({
+        entries: List.of('Barcelona', 'Vacations')
+      }))
+    })
   })
 })
