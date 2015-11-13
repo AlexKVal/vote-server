@@ -1,4 +1,4 @@
-import {List, Map} from 'immutable';
+import {List, Map, fromJS} from 'immutable';
 import {expect} from 'chai';
 
 import {setEntries, next, vote} from '../src/core';
@@ -41,45 +41,45 @@ describe('application logic', () => {
 
   describe('vote', () => {
     it('creates a tally from the voted entry', () => {
-      const state = Map({
-        vote: Map({
-          pair: List.of('Barcelona', 'Vacations')
-        }),
-        entries: List()
+      const state = fromJS({
+        vote: {
+          pair: ['Barcelona', 'Vacations']
+        },
+        entries: []
       });
       const nextState = vote(state, 'Barcelona');
-      expect(nextState).to.equal(Map({
-        vote: Map({
-          pair: List.of('Barcelona', 'Vacations'),
-          tally: Map({
+      expect(nextState).to.equal(fromJS({
+        vote: {
+          pair: ['Barcelona', 'Vacations'],
+          tally: {
             'Barcelona': 1
-          })
-        }),
-        entries: List()
+          }
+        },
+        entries: []
       }));
     });
 
     it('adds to existing tally from the voted entry', () => {
-      const state = Map({
-        vote: Map({
-          pair: List.of('Barcelona', 'Vacations'),
-          tally: Map({
+      const state = fromJS({
+        vote: {
+          pair: ['Barcelona', 'Vacations'],
+          tally: {
             'Barcelona': 3,
             'Vacations': 2
-          })
-        }),
-        entries: List()
+          }
+        },
+        entries: []
       });
       const nextState = vote(state, 'Barcelona');
-      expect(nextState).to.equal(Map({
-        vote: Map({
-          pair: List.of('Barcelona', 'Vacations'),
-          tally: Map({
+      expect(nextState).to.equal(fromJS({
+        vote: {
+          pair: ['Barcelona', 'Vacations'],
+          tally: {
             'Barcelona': 4,
             'Vacations': 2
-          })
-        }),
-        entries: List()
+          }
+        },
+        entries: []
       }));
     });
   })
