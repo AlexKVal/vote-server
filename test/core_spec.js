@@ -36,6 +36,46 @@ describe('application logic', () => {
         }),
         entries: List.of('Awesome')
       }));
+    });
+
+    it('puts winner of current vote back to entries', () => {
+      const state = fromJS({
+        vote: {
+          pair: ['Barcelona', 'Vacations'],
+          tally: {
+            'Barcelona': 4,
+            'Vacations': 2
+          }
+        },
+        entries: ['Sunshine', 'Millions', '127 Hourse']
+      });
+      const nextState = next(state);
+      expect(nextState).to.equal(fromJS({
+        vote: {
+          pair: ['Sunshine', 'Millions']
+        },
+        entries: ['127 Hourse', 'Barcelona']
+      }))
+    });
+
+    it('puts both from tied vote back to entries', () => {
+      const state = fromJS({
+        vote: {
+          pair: ['Trainspotting', '28 Days Later'],
+          tally: {
+            'Trainspotting': 3,
+            '28 Days Later': 3
+          }
+        },
+        entries: ['Sunshine', 'Millions', '127 Hours']
+      });
+      const nextState = next(state);
+      expect(nextState).to.equal(fromJS({
+        vote: {
+          pair: ['Sunshine', 'Millions']
+        },
+        entries: ['127 Hours', 'Trainspotting', '28 Days Later']
+      }));
     })
   })
 
