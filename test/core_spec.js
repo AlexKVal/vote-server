@@ -77,6 +77,23 @@ describe('application logic', () => {
         entries: ['127 Hours', 'Trainspotting', '28 Days Later']
       }));
     })
+
+    it('marks winner when just one entry left', () => {
+      const state = fromJS({
+        vote: {
+          pair: ['Trainspotting', '28 Days Later'],
+          tally: {
+            'Trainspotting': 4,
+            '28 Days Later': 2
+          }
+        },
+        entries: []
+      });
+      const nextState = next(state);
+      expect(nextState).to.equal(fromJS({
+        winner: 'Trainspotting'
+      }));
+    })
   })
 
   describe('vote', () => {
