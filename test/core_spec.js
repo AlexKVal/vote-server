@@ -99,44 +99,32 @@ describe('application logic', () => {
   describe('vote', () => {
     it('creates a tally from the voted entry', () => {
       const state = fromJS({
-        vote: {
-          pair: ['Barcelona', 'Vacations']
-        },
-        entries: []
+        pair: ['Barcelona', 'Vacations']
       });
       const nextState = vote(state, 'Barcelona');
       expect(nextState).to.equal(fromJS({
-        vote: {
-          pair: ['Barcelona', 'Vacations'],
-          tally: {
-            'Barcelona': 1
-          }
-        },
-        entries: []
+        pair: ['Barcelona', 'Vacations'],
+        tally: {
+          'Barcelona': 1
+        }
       }));
     });
 
     it('adds to existing tally from the voted entry', () => {
       const state = fromJS({
-        vote: {
-          pair: ['Barcelona', 'Vacations'],
-          tally: {
-            'Barcelona': 3,
-            'Vacations': 2
-          }
-        },
-        entries: []
+        pair: ['Barcelona', 'Vacations'],
+        tally: {
+          'Barcelona': 3,
+          'Vacations': 2
+        }
       });
       const nextState = vote(state, 'Barcelona');
       expect(nextState).to.equal(fromJS({
-        vote: {
-          pair: ['Barcelona', 'Vacations'],
-          tally: {
-            'Barcelona': 4,
-            'Vacations': 2
-          }
-        },
-        entries: []
+        pair: ['Barcelona', 'Vacations'],
+        tally: {
+          'Barcelona': 4,
+          'Vacations': 2
+        }
       }));
     });
   })
