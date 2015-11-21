@@ -4,6 +4,7 @@
   "description": "server for voting app",
   "main": "index.js",
   "scripts": {
+    "start": "babel-node index.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive",
     "tdd": "npm run test -- --watch"
   },
