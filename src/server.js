@@ -17,5 +17,7 @@ export default function startServer(store) {
     console.log('a client has been connected');
 
     socket.emit('state', serializeState(store));
+
+    socket.on('action', store.dispatch.bind(store));
   });
 }
