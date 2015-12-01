@@ -11,7 +11,7 @@ export default function startServer(store) {
     console.log('a change has occured in Store');
 
     io.emit('state', serializeState(store));
-  }));
+  });
 
   io.on('connection', (socket) => {
     console.log('a client has been connected');
